@@ -9,10 +9,10 @@ class Input extends Component {
   }
 
   addTodo = () => {
-    const action = {action: this.state.action}
+    const task = {action: this.state.action}
 
-    if(action.action && action.action.length > 0){
-      axios.post('/api/todos', action)
+    if(task.action && task.action.length > 0){
+      axios.post('/api/todos', task)
         .then(res => {
           if(res.data){
             this.props.getTodos();
@@ -35,7 +35,7 @@ class Input extends Component {
     let { action } = this.state;
     return (
       <div>
-        <input type="text" onChange={this.handleChange} value={action} required/>
+        <input type="text" onChange={this.handleChange} value={action} />
         <button onClick={this.addTodo}>add todo</button>
       </div>
     )
