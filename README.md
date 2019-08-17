@@ -1,3 +1,3 @@
-# TODO
 
-A simple todo app built with reactjs, nodejs, express and mongodb
+# BasicMERN
+Demonstration for Assignment 1b
