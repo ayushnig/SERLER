@@ -13,7 +13,7 @@ const port = process.env.PORT || 5000;
 
 mongoose
   .connect(
-    process.env.DB,
+ "mongodb://localhost:27017/todotest",
     { useNewUrlParser: true }
   )
   .then(() => console.log(`Database connected successfully`))
