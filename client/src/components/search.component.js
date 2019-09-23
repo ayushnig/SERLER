@@ -8,6 +8,7 @@ export default class searchFiles extends Component {
 
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             description: '',
