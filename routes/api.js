@@ -1,9 +1,16 @@
 const express = require ('express');
 const router = express.Router();
 const Todo = require('../models/todo');
+const Articles = require('../models/articles');
 
 router.get('/todos', (req, res, next) => {
   Todo.find({}, 'action')
+    .then(data => res.json(data))
+    .catch(next)
+});
+
+router.get('/articles', (req, res, next) => {
+  Articles.find({}, 'action')
     .then(data => res.json(data))
     .catch(next)
 });

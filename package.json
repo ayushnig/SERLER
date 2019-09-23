@@ -1,7 +1,7 @@
 {
-  "name": "todo",
+  "name": "Serler",
   "version": "1.0.0",
-  "description": "building todo app using mongodb, express, react and nodejs",
+  "description": "Serach journal and papers using mongodb, express, react and nodejs",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
