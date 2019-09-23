@@ -1,8 +1,30 @@
 const router = require('express').Router();
-let Articles = require('../models/articles.models');
+let Articles = require('../models/articles');
 
 router.route('/').get((req, res) => {
   Articles.find()
+    .then(Articles => res.json(Articles))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/search').get(async (req, res) => {
+  console.log(req.query);
+  const { author, fromDate, toDate } = req.query;
+  console.log(author + fromDate + toDate)
+  let query = {};
+  if (author) {
+    query.author = author;
+  }
+  if (fromDate && toDate) {
+   let date = { "date": {
+      $gte: fromDate,
+        $lt: toDate
+    }
+  }
+  query.date = date
+  }
+console.log(query)
+  await Articles.find(query)
     .then(Articles => res.json(Articles))
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -30,8 +52,8 @@ router.route('/add').post((req, res) => {
   });
 
   newArticles.save()
-  .then(() => res.json('Article has been added!'))
-  .catch(err => res.status(400).json('Error: ' + err));
+    .then(() => res.json('Article has been added!'))
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
 module.exports = router;
