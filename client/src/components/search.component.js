@@ -10,6 +10,7 @@ export default class searchFiles extends Component {
         super(props);
 
         this.onChangeDescription = this.onChangeDescription.bind(this);
+
        
         this.onSubmit = this.onSubmit.bind(this);
         this.ontoggle = this.toggle.bind(this);
@@ -18,7 +19,11 @@ export default class searchFiles extends Component {
             description: '',
             start: new Date(),
             end: new Date(),
-            toggle: true
+            toggle: true,
+            method: '',
+            operator: '',
+            value: ''
+            
         }
     }
 
@@ -47,13 +52,21 @@ export default class searchFiles extends Component {
         })
     }
 
+   
+
+
     onSubmit(e) {
         e.preventDefault();
 
         const Search = {
             description: this.state.description,
             start: this.state.start,
-            end: this.state.end
+            end: this.state.end,
+            method: this.state.method,
+            operator: this.state.operator,
+            value: this.state.value
+
+
         }
 
         console.log(Search);
@@ -94,13 +107,20 @@ class Advance extends Component{
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeStart = this.onChangeStart.bind(this);
         this.onChangeEnd = this.onChangeEnd.bind(this);
+        this.onChangeMethod = this.onChangeMethod.bind(this);
+        this.onChangeOperator = this.onChangeOperator.bind(this);
+        this.onChangeValue = this.onChangeValue.bind(this);
+
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             description: '',
             start: new Date(),
             end: new Date(),
-            toggle: true
+            toggle: true,
+            method: '',
+            operator: '',
+            value: ''
         }
     }
 
@@ -121,6 +141,24 @@ class Advance extends Component{
                 end: date
             })
         }
+
+        onChangeMethod(e) {
+          this.setState({
+            method: e.target.value
+          })
+        }
+
+        onChangeOperator(e) {
+          this.setState({
+            operator: e.target.value
+          })
+        }
+
+        onChangeValue(e) {
+          this.setState({
+            value: e.target.value
+          })
+        }
     
         onSubmit(e) {
             e.preventDefault();
@@ -128,36 +166,14 @@ class Advance extends Component{
             const Search = {
                 description: this.state.description,
                 start: this.state.start,
-                end: this.state.end
+                end: this.state.end,
+                method: this.state.method,
+                operator: this.state.operator,
+                value: this.state.value
             }
     
             console.log(Search);
         }
-        componentDidMount() {
-            // For initial data
-            this.fetchData();
-          }
-        
-          fetchData = (query) => {
-            fetch("http://localhost:5000/articles", {
-              method: "GET",
-              dataType: "JSON",
-              headers: {
-                "Content-Type": "application/json; charset=utf-8",
-              }
-            })
-              .then((resp) => {
-                return resp.json()
-              })
-              .then((data) => {
-                console.log(data)
-                this.setState({ results: data })
-              })
-              .catch((error) => {
-                console.log(error, "catch the hoop")
-              })
-          }
-
     render() {
         return(
             <div>
@@ -176,6 +192,53 @@ class Advance extends Component{
                                 onChange={this.onChangeEnd}
                             /> 
                             </div > 
+
+                            <div class="card border-primary mb-3">
+                   
+                        <select class="form-control" id="exampleSelect1"  value={this.state.method} 
+                    onChange={this.onChangeMethod}>
+                          <option>Select Method</option>
+                          <option>TDD</option>
+                          <option>Scrum</option>
+                          <option>BDD</option>
+                          <option>Kanban</option>
+                          <option>Agile</option>
+                          <option>Walerfall</option>
+                          <option>lean</option>
+                          
+                        </select>
+                     
+                    
+              
+                       </div>
+                       <div class="card border-primary mb-3">
+                   
+                   <select class="form-control" id="exampleSelect1"  value={this.state.operator} 
+               onChange={this.onChangeOperator}>
+                     <option>Select Operator</option>
+                     <option>Contains</option>
+                     <option>Doesn't Contain</option>
+                     <option>Bengins with</option>
+                     <option>Ends With</option>
+                     <option>Is Equal to</option>
+                     <option>Is less than</option>
+                     <option>Is more than</option>
+                     
+                   </select>
+                
+               
+         
+                  </div>
+                  <input type="text" required className="form-control"
+                    value={this.state.value} 
+                    onChange={this.onChangeValue} padding-bottom="20px" />
+                    <div>
+
+                    </div>
+
+            
+
+                            
                             </div>
                             </div>
         )
