@@ -20,3 +20,39 @@
 .App-link {
   color: #09d3ac;
 }
+.i-am-centered {
+   margin: auto; 
+  max-width: 600px;
+  padding-top: 25px;
+}
+
+.i-am-centered-button {
+  
+  text-align: center;
+ 
+ padding-top: 25px;
+}
+
+.i-am-row{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.column_container {
+  width: 959px;
+  margin: 10px;
+}
+.help {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.help-button{
+  align-items: center;
+}
+
+.btn_i {
+  width: 125px;
+  margin-left: auto;
+  margin-right: auto;
+}
