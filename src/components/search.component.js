@@ -35,7 +35,7 @@ export default class searchFiles extends Component {
                 date: this.state.date
             }
         
-            console.log(search);
+            console.log(Search);
             }
     render() {
         return(
