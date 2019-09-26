@@ -33,7 +33,13 @@ export default class searchFiles extends Component {
     this.setState({
       description: e.target.value
     })
-  }
+}
+
+onChangeEnd(date) {
+    this.setState({
+        end: date
+    })
+}
 
 
 onSubmit(e) {
@@ -95,9 +101,8 @@ onSubmit(e) {
             
               </form>
               <button onClick={ this.toggle }>Advanced Search</button>
-            {this.state.show }
-            <Advance />
-            
+              {this.state.show && <Advance />}
+
         
       </div>
 
@@ -182,9 +187,7 @@ class Advance extends Component{
       }
   render() {
       return(
-          <div>
-            <form onSubmit={this.onSubmit}>
-
+          <form onSubmit={this.onSubmit}>
           <div className="i-am-centered" >
 
 
@@ -224,7 +227,7 @@ class Advance extends Component{
                       </select>
                      
                           <label className="drop">Operator: </label>
-                 <select className="form-control" id="exampleSelect1"  value={this.state.operator} 
+                 <select className="form-control" id="exampleSelect2"  value={this.state.operator} 
              onChange={this.onChangeOperator} required>
                    <option value="">Select Operator</option>
                    <option>Contains</option>
@@ -247,9 +250,8 @@ class Advance extends Component{
                 </div>
                 {this.state.show}
                  </form>
-                 
-                 
-                          </div>
+                
+                
       )
       }
 }
