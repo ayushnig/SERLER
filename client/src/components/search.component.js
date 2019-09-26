@@ -17,12 +17,7 @@ export default class searchFiles extends Component {
     this.state = {
       description: '',
       results: [],
-      start: new Date(),
-      end: new Date(),
-      toggle: true,
-      method: '',
-      operator: '',
-      value: ''
+      toggle: true
     }
   }
 
@@ -41,29 +36,11 @@ export default class searchFiles extends Component {
   }
 
 
-  onChangeStart(date) {
-    this.setState({
-        start: date
-    })
-}
-
-onChangeEnd(date) {
-    this.setState({
-        end: date
-    })
-}
-
-
 onSubmit(e) {
   e.preventDefault();
 
   const Search = {
-      description: this.state.description,
-      start: this.state.start,
-      end: this.state.end,
-      method: this.state.method,
-      operator: this.state.operator,
-      value: this.state.value
+      description: this.state.description
 
 
   }
@@ -114,15 +91,14 @@ onSubmit(e) {
             <div class="i-am-centered-button" padding-top="20px">
                 <input type="submit" value="Search" className="btn btn-primary" padding-top="20px" />
             </div>
-            <button onClick={ this.toggle }>Advanced Search</button>
-            {this.state.show && <Advance />}
-            <div>
-              </div>
-              </form>
             
-        <div>
-          <List items={this.state.results} />
-        </div >
+            
+              </form>
+              <button onClick={ this.toggle }>Advanced Search</button>
+            {this.state.show }
+            <Advance />
+            
+        
       </div>
 
     )
@@ -144,8 +120,9 @@ class Advance extends Component{
 
       this.state = {
           description: '',
-          start: new Date(),
-          end: new Date(),
+          start: '',
+          end: '',
+          result:[],
           toggle: true,
           method: '',
           operator: '',
@@ -192,7 +169,7 @@ class Advance extends Component{
       onSubmit(e) {
           e.preventDefault();
   
-          const Search = {
+          const AdvSearch = {
               description: this.state.description,
               start: this.state.start,
               end: this.state.end,
@@ -201,32 +178,41 @@ class Advance extends Component{
               value: this.state.value
           }
   
-          console.log(Search);
+          console.log(AdvSearch);
       }
   render() {
       return(
           <div>
-          <div> This is the Advance Search Field</div>
+            <form onSubmit={this.onSubmit}>
+
           <div className="i-am-centered" >
 
 
               <div className="column-container" >
                   <label className="help" > Start Date: </label>
-                  <DatePicker
+                  <DatePicker 
                           selected={this.state.start}
                           onChange={this.onChangeStart}
+                          placeholderText= "MM/DD/YYYY"
+                          required
                       /> 
-                      <label className="help" > End Date: </label><DatePicker
+                      <label className="help" > End Date: </label>
+                      <DatePicker
                               selected={this.state.end}
                               onChange={this.onChangeEnd}
+                              placeholderText= "MM/DD/YYYY"
+                              required
                           /> 
                           </div > 
-
-                          <div class="card border-primary mb-3">
-                 
-                      <select class="form-control" id="exampleSelect1"  value={this.state.method} 
-                  onChange={this.onChangeMethod}>
-                        <option>Select Method</option>
+                          </div>
+                          <br></br>
+                          
+                          <div className="btn-group btn-block">
+                          <label className="drop">If:</label>
+                  
+                      <select className="form-control" id="exampleSelect1"  value={this.state.method} 
+                  onChange={this.onChangeMethod} required>
+                        <option value="">Select Method</option>
                         <option>TDD</option>
                         <option>Scrum</option>
                         <option>BDD</option>
@@ -236,15 +222,11 @@ class Advance extends Component{
                         <option>lean</option>
                         
                       </select>
-                   
-                  
-            
-                     </div>
-                     <div class="card border-primary mb-3">
-                 
-                 <select class="form-control" id="exampleSelect1"  value={this.state.operator} 
-             onChange={this.onChangeOperator}>
-                   <option>Select Operator</option>
+                     
+                          <label className="drop">Operator: </label>
+                 <select className="form-control" id="exampleSelect1"  value={this.state.operator} 
+             onChange={this.onChangeOperator} required>
+                   <option value="">Select Operator</option>
                    <option>Contains</option>
                    <option>Doesn't Contain</option>
                    <option>Begins with</option>
@@ -254,22 +236,21 @@ class Advance extends Component{
                    <option>Is more than</option>
                    
                  </select>
-              
-             
-       
-                </div>
+                 
+                          <label className="drop">Value: </label>
                 <input type="text" required className="form-control"
                   value={this.props.value} 
                   onChange={this.onChangeValue} padding-bottom="20px" />
-                  <div>
-
-                  </div>
-
-          
-
-                          
-                          </div>
+                 </div>
+                 <div className="i-am-centered-button" padding-top="20px">
+                 <input type="submit" value="Apply Filters" className="btn btn-primary" padding-top="20px" />
+                </div>
+                {this.state.show}
+                 </form>
+                 
+                 
                           </div>
       )
-  }
+      }
 }
+
