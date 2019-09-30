@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import "react-datepicker/dist/react-datepicker.css";
-import { Link } from 'react-router-dom';
+import Advance from './advancesearch.component';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "../App.css";
 const logo = require('../logo.png');
@@ -17,42 +17,44 @@ export default class searchFiles extends Component {
     this.state = {
       description: '',
       results: [],
-      toggle: true
+      toggle: true,
+      showSearch: false
     }
   }
 
   toggle = () => {
-    const {show} = this.state;
+    console.log('print me' + this.state.showSearch)
+    const { showSearch } = this.state;
     this.setState({
-        show: !show
+      showSearch: !showSearch
     })
-}
+  }
 
 
   onChangeDescription(e) {
     this.setState({
       description: e.target.value
     })
-}
+  }
 
-onChangeEnd(date) {
+  onChangeEnd(date) {
     this.setState({
-        end: date
+      end: date
     })
-}
+  }
 
 
-onSubmit(e) {
-  e.preventDefault();
+  onSubmit(e) {
+    e.preventDefault();
 
-  const Search = {
+    const Search = {
       description: this.state.description
 
 
-  }
+    }
 
-  console.log(Search);
-}
+    console.log(Search);
+  }
 
   componentDidMount() {
     // For initial data
@@ -82,28 +84,21 @@ onSubmit(e) {
     return (
       <div>
         <form onSubmit={this.onSubmit}>
-                <div className="form-group" padding-bottom="20px">
-                    <div class="text-center">
-                        <img src={logo} alt="Serler Logo" height="350px" width="500px" padding bottom="20px" />
-                    </div>
-
-                </div>
-                <input type="text" required className="form-control"
-                    value={this.state.description} 
-                    onChange={this.onChangeDescription} padding-bottom="20px" />
-
-
-            
-            <div class="i-am-centered-button" padding-top="20px">
-                <input type="submit" value="Search" className="btn btn-primary" padding-top="20px" />
+          <div className="form-group" padding-bottom="20px">
+            <div class="text-center">
+              <img src={logo} alt="Serler Logo" height="350px" width="500px" padding bottom="20px" />
             </div>
-            
-            
-              </form>
-              <Link to="/advancesearch" className="btn btn-primary">Advanced Search</Link>
-              {this.state.show}
+          </div>
+          <input type="text" required className="form-control"
+            value={this.state.description}
+            onChange={this.onChangeDescription} padding-bottom="20px" />
 
-        
+          <div class="i-am-centered-button" padding-top="20px">
+          {this.state.showSearch ? null : <input type="submit" value="Search" className="btn btn-primary" padding-top="20px" />} 
+          </div>
+        </form>
+        {this.state.showSearch ? <button className="btn btn-primary" onClick={this.toggle}>Hide Advanced Search</button> : <button className="btn btn-primary" onClick={this.toggle}>Show Advanced Search</button>}  
+        {this.state.showSearch ? <Advance description={this.state.description} /> : null}
       </div>
 
     )
