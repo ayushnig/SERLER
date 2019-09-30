@@ -6,6 +6,7 @@ import Navbar from './components/navbar.component';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import searchFiles from "./components/search.component";
+import Advance from './components/advancesearch.component';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <br/>
       <Route path="/addfiles" exact component={addFiles} />
       <Route path="/" exact component={searchFiles} />
+      <Route path = "/advancesearch" exact component={Advance} />
       </div>
 
     </Router>
