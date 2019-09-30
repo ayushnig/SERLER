@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 import List from './itemLister.component';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "../App.css";
 const logo = require('../logo.png');
+
 
 export default class searchFiles extends Component {
   constructor(props) {
@@ -109,7 +111,6 @@ onSubmit(e) {
     )
   }
 }
-
 class Advance extends Component{
   constructor(props) {
       super(props);
@@ -140,11 +141,10 @@ class Advance extends Component{
               description: e.target.value
           })
       }
-  
       onChangeStart(date) {
-          this.setState({
-              start: date
-          })
+        this.setState({
+            start: date
+        })
       }
   
       onChangeEnd(date) {
@@ -185,28 +185,40 @@ class Advance extends Component{
   
           console.log(AdvSearch);
       }
+      
+      
+      
   render() {
       return(
           <form onSubmit={this.onSubmit}>
           <div className="i-am-centered" >
-
-
               <div className="column-container" >
                   <label className="help" > Start Date: </label>
-                  <DatePicker 
-                          selected={this.state.start}
-                          onChange={this.onChangeStart}
-                          placeholderText= "MM/DD/YYYY"
-                          required
-                      /> 
+                  <DatePicker
+                              selected={this.state.start}
+                              onChange={this.onChangeStart}
+                              peekNextMonth
+                              showMonthDropdown
+                              showYearDropdown
+                              dropdownMode="select"                              
+                              placeholderText= "MM/DD/YYYY"
+                              required
+                          /> 
                       <label className="help" > End Date: </label>
                       <DatePicker
                               selected={this.state.end}
                               onChange={this.onChangeEnd}
+                              peekNextMonth
+                              showMonthDropdown
+                              showYearDropdown
+                              maxDate={new Date()}
+                              dropdownMode="select"   
                               placeholderText= "MM/DD/YYYY"
                               required
                           /> 
                           </div > 
+                          
+                              
                           </div>
                           <br></br>
                           
@@ -250,9 +262,6 @@ class Advance extends Component{
                 </div>
                 {this.state.show}
                  </form>
-                
-                
       )
       }
-}
-
+    }
