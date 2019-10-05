@@ -68,10 +68,16 @@ export default class searchFiles extends Component {
               <img src={logo} alt="Serler Logo" height="350px" width="500px" padding bottom="20px" />
             </div>
           </div>
+
           <input type="text" required className="form-control"
             value={this.state.description}
-            onChange={this.onChangeDescription} padding-bottom="20px" />
+            onChange={this.onChangeDescription} padding-bottom="20px" />            
+            <a href="/savedsearches">Saved Searches</a>
 
+          <div class="d-flex justify-content-end">
+          <button className="btn btn-dark" onClick={this.save}>Save Search</button>
+          </div>
+          
           <div class="i-am-centered-button" padding-top="20px">
             {this.state.showSearch ? null : <input type="submit" value="Search" className="btn btn-dark" padding-top="20px" />}
           </div>

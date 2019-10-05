@@ -74,6 +74,7 @@ export default class Advance extends Component {
         }
 
         console.log(AdvSearch);
+        window.location = '/results';
     }
 
 
