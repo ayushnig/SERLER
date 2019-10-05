@@ -1,0 +1,37 @@
+{
+    "name": "Serler",
+    "version": "1.0.0",
+    "description": "Serach journal and papers using mongodb, express, react and nodejs",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js",
+      "start-watch": "nodemon index.js",
+      "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\"",
+      "heroku-postbuild": "cd client && yarn --production=false && yarn run build",
+      "test": "mocha"
+    },
+    "engines": {
+      "yarn": "1.10.1",
+      "node": "8.12.0"
+    },
+    "author": "Ayush Nigam",
+    "license": "MIT",
+    "dependencies": {
+      "axios": "^0.18.0",
+      "body-parser": "^1.18.3",
+      "cors": "^2.8.5",
+      "dotenv": "^6.2.0",
+      "express": "^4.16.4",
+      "mongoose": "^5.3.6",
+      "react-datatable-bs": "^1.0.12",
+      "react-dom": "^16.10.1"
+    },
+    "devDependencies": {
+      "chai": "^4.2.0",
+      "concurrently": "^4.0.1",
+      "mocha": "^6.2.0",
+      "nodemon": "^1.19.2"
+    },
+    "keywords": []
+  }
+  
