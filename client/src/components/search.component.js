@@ -54,6 +54,7 @@ export default class searchFiles extends Component {
     }
 
     console.log(Search);
+    window.location = '/results';
   }
 
   componentDidMount() {
@@ -94,10 +95,10 @@ export default class searchFiles extends Component {
             onChange={this.onChangeDescription} padding-bottom="20px" />
 
           <div class="i-am-centered-button" padding-top="20px">
-          {this.state.showSearch ? null : <input type="submit" value="Search" className="btn btn-primary" padding-top="20px" />} 
+          {this.state.showSearch ? null : <input type="submit" value="Search" className="btn btn-dark" padding-top="20px" />} 
           </div>
         </form>
-        {this.state.showSearch ? <button className="btn btn-primary" onClick={this.toggle}>Hide Advanced Search</button> : <button className="btn btn-primary" onClick={this.toggle}>Show Advanced Search</button>}  
+        {this.state.showSearch ? <button className="btn btn-dark" onClick={this.toggle}>Hide Advanced Search</button> : <button className="btn btn-dark" onClick={this.toggle}>Show Advanced Search</button>}  
         {this.state.showSearch ? <Advance description={this.state.description} /> : null}
       </div>
 
