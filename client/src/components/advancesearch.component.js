@@ -151,7 +151,7 @@ export default class Advance extends Component {
                     </div>
                     {this.state.show}
                     <div class="i-am-centered-button" padding-top="20px">
-                        <input type="submit" value="Search" className="btn btn-primary" padding-top="20px" />
+                        <input type="submit" value="Search" className="btn btn-dark" padding-top="20px" />
                     </div>
                 </form>
             </div>
