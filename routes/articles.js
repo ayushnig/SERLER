@@ -3,7 +3,10 @@ let Articles = require('../models/articles');
 
 router.route('/').get((req, res) => {
   Articles.find()
-    .then(Articles => res.json(Articles))
+    .then(Articles => {
+      console.log(Articles) 
+      res.json(Articles)
+    })
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -15,17 +18,20 @@ router.route('/search').get(async (req, res) => {
   if (author) {
     query.author = author;
   }
-  if (fromDate && toDate) {
+  if (fromDate && toDate ) {
    let date = { "date": {
       $gte: fromDate,
-        $lt: toDate
+      $lt: toDate
     }
   }
   query.date = date
   }
 console.log(query)
   await Articles.find(query)
-    .then(Articles => res.json(Articles))
+    .then(Articles => {
+      console.log(Articles)
+      res.json(Articles)
+    })
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
