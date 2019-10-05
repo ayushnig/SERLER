@@ -1,4 +1,6 @@
 import React, { Component, useState } from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 import "react-datepicker/dist/react-datepicker.css";
 import Advance from './advancesearch.component';
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -46,41 +48,17 @@ export default class searchFiles extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
-    const Search = {
-      description: this.state.description
-
-
-    }
-
-    console.log(Search);
-    window.location = '/results';
+    console.log(e)
+    let authorName = this.state.description || null;
+    let query = authorName.toLowerCase();
+    let path = `results`;
+        this.props.history.push(path, query);
   }
-
+   
   componentDidMount() {
     // For initial data
-    this.fetchData();
   }
 
-  fetchData = (query) => {
-    fetch("http://localhost:5000/articles", {
-      method: "GET",
-      dataType: "JSON",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      }
-    })
-      .then((resp) => {
-        return resp.json()
-      })
-      .then((data) => {
-        console.log(data)
-        this.setState({ results: data })
-      })
-      .catch((error) => {
-        console.log(error, "catch the hoop")
-      })
-  }
   render() {
     return (
       <div>
@@ -95,13 +73,13 @@ export default class searchFiles extends Component {
             onChange={this.onChangeDescription} padding-bottom="20px" />
 
           <div class="i-am-centered-button" padding-top="20px">
-          {this.state.showSearch ? null : <input type="submit" value="Search" className="btn btn-dark" padding-top="20px" />} 
+            {this.state.showSearch ? null : <input type="submit" value="Search" className="btn btn-dark" padding-top="20px" />}
           </div>
         </form>
-        {this.state.showSearch ? <button className="btn btn-dark" onClick={this.toggle}>Hide Advanced Search</button> : <button className="btn btn-dark" onClick={this.toggle}>Show Advanced Search</button>}  
+        {this.state.showSearch ? <button className="btn btn-dark" onClick={this.toggle}>Hide Advanced Search</button> : <button className="btn btn-dark" onClick={this.toggle}>Show Advanced Search</button>}
         {this.state.showSearch ? <Advance description={this.state.description} /> : null}
+        {this.state.show}
       </div>
-
     )
   }
 }

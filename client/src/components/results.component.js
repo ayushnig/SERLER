@@ -7,33 +7,38 @@ import axios from 'axios';
 export default class Results extends Component {
 
   constructor(props) {
-
+    console.log(props.location.state)
     super(props);
 
 
     this.state = {
+      query: this.props.location.state,
       articles: []
     }
 
-}
+  }
 
-    componentDidMount() {
-        axios.get('http://localhost:5000/articles/')
-          .then(response => {
-            this.setState({ articles: response.data })
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-      }
+  componentWillMount() {
+    let authorName = this.state.query || null;
+    let query = authorName.toLowerCase();
+    axios.get(`http://localhost:5000/articles/search?&author=${query}`)
+      .then(response => {
+        console.log(response.data)
+        this.setState({ articles: response.data })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
 
-      
+
   render() {
     const { articles } = this.state;
+    console.log(articles.length)
     return (
       <div>
-          <h1>Search Results</h1>
-          <br></br>
+        <h1>Search Results</h1>
+        <br></br>
         <ReactTable
           data={articles}
           columns={[
@@ -51,39 +56,39 @@ export default class Results extends Component {
                 },
 
                 {
-                    Header: "Journal",
-                    accessor: "journal"
-                  },
+                  Header: "Journal",
+                  accessor: "journal"
+                },
 
-                  {
-                    Header: "Year",
-                    accessor: "year"
-                  },
+                {
+                  Header: "Year",
+                  accessor: "year"
+                },
 
-                  {
-                    Header: "Volume",
-                    accessor: "volume"
-                  },
+                {
+                  Header: "Volume",
+                  accessor: "volume"
+                },
 
-                  {
-                    Header: "Number",
-                    accessor: "number"
-                  },
+                {
+                  Header: "Number",
+                  accessor: "number"
+                },
 
-                  {
-                    Header: "Pages",
-                    accessor: "pages"
-                  },
+                {
+                  Header: "Pages",
+                  accessor: "pages"
+                },
 
-                  {
-                    Header: "Month",
-                    accessor: "month"
-                  }
+                {
+                  Header: "Month",
+                  accessor: "month"
+                }
 
 
               ]
             },
-            
+
           ]}
           defaultSorted={[
             {
@@ -91,11 +96,10 @@ export default class Results extends Component {
               asc: true
             }
           ]}
-          defaultPageSize={20}
+          pageSize={articles.length} // the number of rows per page to be displayed
           className="-striped -highlight"
         />
         <br />
-        
       </div>
     );
   }
