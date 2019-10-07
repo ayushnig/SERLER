@@ -1,99 +1,122 @@
-import { render } from "react-dom";
-import ReactTable from "react-table";
-import "react-table/react-table.css";
-import axios from 'axios';
-import React, { Component, useState } from 'react';
-
+import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "../App.css";
+import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 
-export default class Results extends Component {
+export default class Save extends Component {
 
-  constructor(props) {
+    constructor(props) {
+        super(props);
 
-    super(props);
-
+    this.onChangeName = this.onChangeName.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.ontoggle = this.toggle.bind(this);
+    this.onChangeStart = this.onChangeStart.bind(this);
+    this.onChangeEnd = this.onChangeEnd.bind(this);
+    this.onChangeMethod = this.onChangeMethod.bind(this);
+    this.onChangeOperator = this.onChangeOperator.bind(this);
+    this.onChangeValue = this.onChangeValue.bind(this);
+    
     this.onSubmit = this.onSubmit.bind(this);
-  
+
     this.state = {
-      articles: [],
-      description: this.props.description,
-      results: [],
-      toggle: true,
-      showSearch: false
+      name: '',
+      description: '',
+      start: new Date,
+      end: new Date,
+      method: '',
+      operator: '',
+      value: ''
     }
+  }
 
+
+  onChangeName(e) {
+    this.setState({
+      name: e.target.value
+    })
 }
-
-toggle = () => {
-  console.log('print me' + this.state.showSearch)
-  const { showSearch } = this.state;
-  this.setState({
-    showSearch: !showSearch
-  })
-}
-
 
 onChangeDescription(e) {
-  this.setState({
-    description: e.target.value
-  })
+    this.setState({
+      description: e.target.value
+    })
+}
+
+onChangeStart(date) {
+    this.setState({
+      start: date
+    })
 }
 
 onChangeEnd(date) {
-  this.setState({
-    end: date
-  })
+    this.setState({
+      end: date
+    })
 }
+
+onChangeMethod(e) {
+    this.setState({
+      method: e.target.value
+    })
+}
+
+onChangeOperator(e) {
+    this.setState({
+      operator: e.target.value
+    })
+}
+
+onChangeValue(e) {
+    this.setState({
+      value: e.target.value
+    })
+}
+
 
 
 onSubmit(e) {
   e.preventDefault();
 
-  const Search = {
-    description: this.state.description
-
-
+  const searches = {
+      name: this.state.name,
+      description: this.state.description,
+      start: this.state.start,
+      end: this.state.end,
+      method: this.state.method,
+      operator: this.state.operator,
+      value: this.state.value,
+      
   }
+  axios({
+    method: 'post',
+    url: 'http://localhost:5000/searches/save',
+    headers: {}, 
+    data: searches
+  });
 
-  console.log(Search);
-  window.location = '/results';
+  console.log(searches);
+  
 }
 
-    componentDidMount() {
-        axios.get('http://localhost:5000/articles/')
-          .then(response => {
-            this.setState({ articles: response.data })
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-      }
 
-      
-  render() {
-    const { articles } = this.state;
-    return (
-      <div>
-         <h1>Search Results</h1>
-         
-        <div>
-        <form onSubmit={this.onSubmit}>
-          
-          <input type="text" required className="form-control"
-            value={this.state.description}
-            onChange={this.onChangeDescription} padding-bottom="20px" />            
+    render() {
+        return(
+                <div>
+                 <form onSubmit={this.onSubmit}>
 
-          <div class="d-flex justify-content-end">
-          <a href="/savesearch">Save Search</a>
-          </div>
-        </form>
-        <div>
+                 <input type="text" required className="form-control"
+                    value={this.state.name}
+                    onChange={this.onChangeName} padding-bottom="20px" />            
+                
+                 <input type="text" required className="form-control"
+                    value={this.state.description}
+                    onChange={this.onChangeDescription} padding-bottom="20px" />            
+                </form>
+                <div>
+                
                 <form onSubmit={this.onSubmit}>
                     <div className="i-am-centered" >
                         <div className="column-container" >
@@ -168,72 +191,7 @@ onSubmit(e) {
                     </div>
                 </form>
             </div>
-      </div>
-          <br></br>
-        <ReactTable
-          data={articles}
-          columns={[
-            {
-              columns: [
-
-                {
-                  Header: "Author",
-                  accessor: "author"
-                },
-
-                {
-                  Header: "Title",
-                  accessor: "title"
-                },
-
-                {
-                    Header: "Journal",
-                    accessor: "journal"
-                  },
-
-                  {
-                    Header: "Year",
-                    accessor: "year"
-                  },
-
-                  {
-                    Header: "Volume",
-                    accessor: "volume"
-                  },
-
-                  {
-                    Header: "Number",
-                    accessor: "number"
-                  },
-
-                  {
-                    Header: "Pages",
-                    accessor: "pages"
-                  },
-
-                  {
-                    Header: "Month",
-                    accessor: "month"
-                  }
-
-
-              ]
-            },
-            
-          ]}
-          defaultSorted={[
-            {
-              id: "title",
-              asc: true
-            }
-          ]}
-          defaultPageSize={10}
-          className="-striped -highlight"
-        />
-        <br />
-        
-      </div>
-    );
-  }
+            </div>
+        )
+    }
 }
-
