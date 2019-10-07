@@ -19,7 +19,17 @@ export default class Saved extends Component {
 componentDidMount() {
     axios.get('http://localhost:5000/searches')
       .then(response => {
-        this.setState({ savedSearches: response.data })
+        if (response.data && response.data.length > 0) {
+          for (let i = 0; i < response.data.length; i++ ){
+            let startConversion = response.data[i].start
+            let endConversion = response.data[i].end
+           response.data[i].start = new Date(startConversion).toISOString().split('T')[0];
+           response.data[i].end = new Date(endConversion).toISOString().split('T')[0];
+          }
+          this.setState({ savedSearches: response.data })
+        } else {
+          this.setState({savedSearches: ''})
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -46,16 +56,10 @@ componentDidMount() {
                   accessor: "description"
                 },
 
-                {
-                    Header: "Start Date",
-                    accessor: "start"
-                  },
-
                   {
-                    Header: "End Date",
-                    accessor: "end"
+                    Header: "Source",
+                    accessor: "source"
                   },
-
                   {
                     Header: "Method",
                     accessor: "method"
@@ -69,7 +73,17 @@ componentDidMount() {
                   {
                     Header: "Value",
                     accessor: "value"
-                  }
+                  },
+                  
+                {
+                  Header: "Start Date",
+                  accessor: "start"
+                },
+
+                {
+                  Header: "End Date",
+                  accessor: "end"
+                }
 
 
               ]

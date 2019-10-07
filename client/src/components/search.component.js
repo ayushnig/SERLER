@@ -3,7 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Advance from './advancesearch.component';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "../App.css";
-const logo = require('../logo.png');
+const logo = require('../logo.JPG');
 
 
 export default class searchFiles extends Component {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "../App.css";
 import axios from 'axios';
+import DatePicker from 'react-datepicker';
 
 
 export default class addFiles extends Component {
@@ -11,24 +12,17 @@ export default class addFiles extends Component {
 
     this.onChangeAuthor = this.onChangeAuthor.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
-    this.onChangeJournal = this.onChangeJournal.bind(this);
-    this.onChangeYear = this.onChangeYear.bind(this);
-    this.onChangeVolume = this.onChangeVolume.bind(this);
-    this.onChangeNumber = this.onChangeNumber.bind(this);
+    this.onChangeSource = this.onChangeSource.bind(this);
     this.onChangePages = this.onChangePages.bind(this);
-    this.onChangeMonth = this.onChangeMonth.bind(this);    
+    this.onChangeDate= this.onChangeDate.bind(this);  
     
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       author: '',
       title: '',
-      journal: '',
-      year: '',
-      volume: '',
-      number: '',
+      source: '',
       pages: '',
-      month:'',
       date: new Date()
     }
   }
@@ -46,27 +40,9 @@ onChangeTitle(e) {
     })
 }
 
-onChangeJournal(e) {
+onChangeSource(e) {
     this.setState({
-      journal: e.target.value
-    })
-}
-
-onChangeYear(e) {
-    this.setState({
-      year: e.target.value
-    })
-}
-
-onChangeVolume(e) {
-    this.setState({
-      volume: e.target.value
-    })
-}
-
-onChangeNumber(e) {
-    this.setState({
-      number: e.target.value
+      source: e.target.value
     })
 }
 
@@ -76,10 +52,10 @@ onChangePages(e) {
     })
 }
 
-onChangeMonth(e) {
-    this.setState({
-      month: e.target.value
-    })
+onChangeDate(date) {
+  this.setState({
+    date: date
+  })
 }
 
 onSubmit(e) {
@@ -88,13 +64,9 @@ onSubmit(e) {
   const Papers = {
       author: this.state.author,
       title: this.state.title,
-      journal: this.state.journal,
-      year: this.state.year,
-      volume: this.state.volume,
-      number: this.state.number,
+      source: this.state.source,
       pages: this.state.pages,
-      month: this.state.month,
-      date: new Date()
+      date: this.state.date,
       
   }
   axios({
@@ -104,6 +76,7 @@ onSubmit(e) {
     data: Papers
   });
   console.log(Papers);
+  window.location='/addfiles';
   
 }
 
@@ -127,49 +100,41 @@ onSubmit(e) {
                 </div>
 
                 <div className="form-group" padding-bottom="20px">
-                <label>Enter Journal Name:</label>
-                <input type="text" required className="form-control"
-                    value={this.state.journal} 
-                    onChange={this.onChangeJournal} padding-bottom="20px" />
-                </div>
-
-                <div className="form-group" padding-bottom="20px">
-                <label>Enter Year Published:</label>
-                <input type="text" required className="form-control"
-                    value={this.state.year} 
-                    onChange={this.onChangeYear} padding-bottom="20px" />
-                </div>
-
-                <div className="form-group" padding-bottom="20px">
-                <label>Enter Volume:</label>
-                <input type="text" required className="form-control"
-                    value={this.state.volume} 
-                    onChange={this.onChangeVolume} padding-bottom="20px" />
-                </div>
-
-                <div className="form-group" padding-bottom="20px">
-                <label>Enter Volume Number:</label>
-                <input type="text" required className="form-control"
-                    value={this.state.number} 
-                    onChange={this.onChangeNumber} padding-bottom="20px" />
-                </div>
-
-                <div className="form-group" padding-bottom="20px">
                 <label>Enter Pages:</label>
                 <input type="text" required className="form-control"
                     value={this.state.pages} 
                     onChange={this.onChangePages} padding-bottom="20px" />
                 </div>
+                <label className="help" > Date: </label>
+                            <DatePicker
+                                selected={this.state.date}
+                                onChange={this.onChangeDate}
+                                peekNextMonth
+                                showMonthDropdown
+                                showYearDropdown
+                                maxDate={new Date()}
+                                dropdownMode="select"
+                                placeholderText="MM/DD/YYYY"
+                            />
+                            <div className="btn-group btn-block">
+                                <label className="drop" > Source: </label>
+                                <select className="form-control" id="exampleSelect1" value={this.state.Source}
+                            onChange={this.onChangeSource}>
+                            <option value="">Select Source</option>
+                            <option>Research</option>
+                            <option>Reviews</option>
+                            <option>Journal</option>
+                            <option>COnference Paper</option>
+                            <option>Case Studies</option>
 
-                <div className="form-group" padding-bottom="20px">
-                <label>Enter Month Published:</label>
-                <input type="text" required className="form-control"
-                    value={this.state.month} 
-                    onChange={this.onChangeMonth} padding-bottom="20px" />
-                </div>
+                        </select>
+
+
+                                </div>
+
 
                 <div class="i-am-centered-button" padding-top="20px">
-                <input type="submit" value="Search" className="btn btn-primary" padding-top="20px" />
+                <input type="submit" value="Add Files" className="btn btn-primary" padding-top="20px" />
                 </div>
 
 

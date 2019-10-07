@@ -13,6 +13,8 @@ export default class Save extends Component {
 
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
+    
+    this.onChangeSource = this.onChangeSource.bind(this);
     this.onChangeStart = this.onChangeStart.bind(this);
     this.onChangeEnd = this.onChangeEnd.bind(this);
     this.onChangeMethod = this.onChangeMethod.bind(this);
@@ -24,6 +26,7 @@ export default class Save extends Component {
     this.state = {
       name: '',
       description: '',
+      source: '',
       start: new Date,
       end: new Date,
       method: '',
@@ -43,6 +46,12 @@ onChangeDescription(e) {
     this.setState({
       description: e.target.value
     })
+}
+
+onChangeSource(e) {
+  this.setState({
+    source: e.target.value
+  })
 }
 
 onChangeStart(date) {
@@ -83,6 +92,8 @@ onSubmit(e) {
   const searches = {
       name: this.state.name,
       description: this.state.description,
+      
+      source: this.state.source,
       start: this.state.start,
       end: this.state.end,
       method: this.state.method,
@@ -98,6 +109,7 @@ onSubmit(e) {
   });
 
   console.log(searches);
+  window.location="/savesearch";
   
 }
 
@@ -106,11 +118,11 @@ onSubmit(e) {
         return(
                 <div>
                  <form onSubmit={this.onSubmit}>
-
+<label>Type a Name for saving the Search:</label>
                  <input type="text" required className="form-control"
                     value={this.state.name}
                     onChange={this.onChangeName} padding-bottom="20px" />            
-                
+                <label>Description: </label>
                  <input type="text" required className="form-control"
                     value={this.state.description}
                     onChange={this.onChangeDescription} padding-bottom="20px" />            
@@ -144,6 +156,22 @@ onSubmit(e) {
                                 placeholderText="MM/DD/YYYY"
                                 required
                             />
+                            
+                            <div className="btn-group btn-block">
+                                <label className="drop" > Source: </label>
+                                <select className="form-control" id="exampleSelect1" value={this.state.Source}
+                            onChange={this.onChangeSource}>
+                            <option value="">Select Source</option>
+                            <option>Research</option>
+                            <option>Reviews</option>
+                            <option>Journal</option>
+                            <option>COnference Paper</option>
+                            <option>Case Studies</option>
+
+                        </select>
+
+
+                                </div>
                         </div >
 
 
