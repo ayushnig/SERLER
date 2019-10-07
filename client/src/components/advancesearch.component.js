@@ -16,13 +16,14 @@ export default class Advance extends Component {
         this.onChangeMethod = this.onChangeMethod.bind(this);
         this.onChangeOperator = this.onChangeOperator.bind(this);
         this.onChangeValue = this.onChangeValue.bind(this);
-
+        this.onChangeSource = this.onChangeSource.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             description: this.props.description,
             start: '',
             end: '',
+            source: '',
             result: [],
             toggle: true,
             method: '',
@@ -40,6 +41,12 @@ export default class Advance extends Component {
     onChangeEnd(date) {
         this.setState({
             end: date
+        })
+    }
+
+    onChangeSource(e) {
+        this.setState({
+            source: e.target.value
         })
     }
 
@@ -68,6 +75,7 @@ export default class Advance extends Component {
             description: this.props.description,
             start: this.state.start,
             end: this.state.end,
+            source: this.state.source,
             method: this.state.method,
             operator: this.state.operator,
             value: this.state.value
@@ -107,6 +115,21 @@ export default class Advance extends Component {
                                 dropdownMode="select"
                                 placeholderText="MM/DD/YYYY"
                             />
+                            <div className="btn-group btn-block">
+                                <label className="drop" > Source: </label>
+                                <select className="form-control" id="exampleSelect1" value={this.state.Source}
+                            onChange={this.onChangeSource}>
+                            <option value="">Select Source</option>
+                            <option>Research</option>
+                            <option>Reviews</option>
+                            <option>Journal</option>
+                            <option>COnference Paper</option>
+                            <option>Case Studies</option>
+
+                        </select>
+
+
+                                </div>
                         </div >
 
 

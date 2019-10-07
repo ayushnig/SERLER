@@ -40,9 +40,7 @@ router.route('/add').post((req, res) => {
   const author = req.body.author;
   const title = req.body.title;
   const source = req.body.source;
-  const journal = req.body.journal;
   const year = req.body.year;
-  const volume = req.body.volume;
   const number = req.body.number;
   const pages = req.body.pages;
   const month = req.body.month;
@@ -52,9 +50,7 @@ router.route('/add').post((req, res) => {
     author,
     title,
     source,
-    journal,
     year,
-    volume,
     number,
     pages,
     month,

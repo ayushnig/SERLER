@@ -11,7 +11,7 @@ export default class addFiles extends Component {
 
     this.onChangeAuthor = this.onChangeAuthor.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
-    this.onChangeJournal = this.onChangeJournal.bind(this);
+    this.onChangeSource = this.onChangeSource.bind(this);
     this.onChangeYear = this.onChangeYear.bind(this);
     this.onChangeVolume = this.onChangeVolume.bind(this);
     this.onChangeNumber = this.onChangeNumber.bind(this);
@@ -23,7 +23,7 @@ export default class addFiles extends Component {
     this.state = {
       author: '',
       title: '',
-      journal: '',
+      source: '',
       year: '',
       volume: '',
       number: '',
@@ -46,10 +46,11 @@ onChangeTitle(e) {
     })
 }
 
-onChangeJournal(e) {
-    this.setState({
-      journal: e.target.value
-    })
+
+onChangeSource(e) {
+  this.setState({
+    source: e.target.value
+  })
 }
 
 onChangeYear(e) {
@@ -88,7 +89,7 @@ onSubmit(e) {
   const Papers = {
       author: this.state.author,
       title: this.state.title,
-      journal: this.state.journal,
+      source: this.state.source,
       year: this.state.year,
       volume: this.state.volume,
       number: this.state.number,
@@ -127,10 +128,10 @@ onSubmit(e) {
                 </div>
 
                 <div className="form-group" padding-bottom="20px">
-                <label>Enter Journal Name:</label>
+                <label>Enter Source:</label>
                 <input type="text" required className="form-control"
-                    value={this.state.journal} 
-                    onChange={this.onChangeJournal} padding-bottom="20px" />
+                    value={this.state.source} 
+                    onChange={this.onChangesource} padding-bottom="20px" />
                 </div>
 
                 <div className="form-group" padding-bottom="20px">

@@ -17,7 +17,12 @@ export default class Results extends Component {
     super(props);
 
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.ontoggle = this.toggle.bind(this);
+    this.onChangeStart = this.onChangeStart.bind(this);
+    this.onChangeEnd = this.onChangeEnd.bind(this);
+    this.onChangeMethod = this.onChangeMethod.bind(this);
+    this.onChangeOperator = this.onChangeOperator.bind(this);
+    this.onChangeValue = this.onChangeValue.bind(this);
+    this.onChangeSource = this.onChangeSource.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   
     this.state = {
@@ -26,7 +31,13 @@ export default class Results extends Component {
       description: this.props.description,
       results: [],
       toggle: true,
-      showSearch: false
+      showSearch: false,
+      start: '',
+      end: '',
+      source: '',
+      method: '',
+      operator: '',
+      value: ''
     }
 
   }
@@ -60,25 +71,59 @@ onChangeDescription(e) {
   })
 }
 
-onChangeEnd(date) {
+onChangeStart(date) {
   this.setState({
-    end: date
+      start: date
   })
 }
 
+onChangeEnd(date) {
+  this.setState({
+      end: date
+  })
+}
+
+onChangeSource(e) {
+  this.setState({
+      source: e.target.value
+  })
+}
+
+onChangeMethod(e) {
+  this.setState({
+      method: e.target.value
+  })
+}
+
+onChangeOperator(e) {
+  this.setState({
+      operator: e.target.value
+  })
+}
+
+onChangeValue(e) {
+  this.setState({
+      value: e.target.value
+  })
+}
 
 onSubmit(e) {
   e.preventDefault();
 
-  const Search = {
-    description: this.state.description
-
-
+  const AdvSearch = {
+      description: this.props.description,
+      start: this.state.start,
+      end: this.state.end,
+      source: this.state.source,
+      method: this.state.method,
+      operator: this.state.operator,
+      value: this.state.value
   }
 
-  console.log(Search);
+  console.log(AdvSearch);
   window.location = '/results';
 }
+
 
     // componentDidMount() {
     //     axios.get('http://localhost:5000/articles/')
@@ -137,6 +182,21 @@ onSubmit(e) {
                                 required
                             />
                         </div >
+                        <div className="btn-group btn-block">
+                                <label className="drop" > Source: </label>
+                                <select className="form-control" id="exampleSelect1" value={this.state.Source}
+                            onChange={this.onChangeSource}>
+                            <option value="">Select Source</option>
+                            <option>Research</option>
+                            <option>Reviews</option>
+                            <option>Journal</option>
+                            <option>COnference Paper</option>
+                            <option>Case Studies</option>
+
+                        </select>
+
+
+                                </div>
 
 
                     </div>
@@ -202,8 +262,8 @@ onSubmit(e) {
                 },
 
                 {
-                    Header: "Journal",
-                    accessor: "journal"
+                    Header: "Source",
+                    accessor: "source"
                   },
 
                   {

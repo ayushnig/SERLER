@@ -98,6 +98,7 @@ onSubmit(e) {
   });
 
   console.log(searches);
+  window.location='/';
   
 }
 
@@ -106,14 +107,17 @@ onSubmit(e) {
         return(
                 <div>
                  <form onSubmit={this.onSubmit}>
-
+                <div><label>Give your Search a Name:</label>
                  <input type="text" required className="form-control"
                     value={this.state.name}
-                    onChange={this.onChangeName} padding-bottom="20px" />            
-                
+                    onChange={this.onChangeName} padding-bottom="20px" />    
+                    </div>
+                    <div padding-top="20px">        
+                <label>Description:</label>
                  <input type="text" required className="form-control"
                     value={this.state.description}
-                    onChange={this.onChangeDescription} padding-bottom="20px" />            
+                    onChange={this.onChangeDescription} padding-bottom="20px" />   
+                    </div>         
                 </form>
                 <div>
                 
