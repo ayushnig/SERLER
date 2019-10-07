@@ -38,6 +38,7 @@ console.log(query)
 router.route('/add').post((req, res) => {
   const author = req.body.author;
   const title = req.body.title;
+  const source = req.body.source;
   const journal = req.body.journal;
   const year = req.body.year;
   const volume = req.body.volume;
@@ -49,6 +50,7 @@ router.route('/add').post((req, res) => {
   const newArticles = new Articles({
     author,
     title,
+    source,
     journal,
     year,
     volume,
