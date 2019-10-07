@@ -21,6 +21,14 @@ describe('Object Test', function(){
     car.should.deep.equal(car1);
   });
 
+  it('should compare objects', function(){
+    var car = {name:'Figo', Maker:'Ford'}
+    var car1 = {name:'Figo', Maker:'Ford'}
+
+    // car.should.equal(car1);
+    car.should.deep.equal(car1);
+  });
+
   // it('handling null', function(){
   //   var car = null;
   //   //car.should.not.exist;
