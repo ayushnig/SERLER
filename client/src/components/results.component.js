@@ -21,7 +21,7 @@ export default class Results extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   
     this.state = {
-      query: this.props.location.state,
+      query: this.props.location.state.description,
       articles: [],
       description: this.props.location.state,
       results: [],
@@ -31,9 +31,9 @@ export default class Results extends Component {
 
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let authorName = this.state.query || null;
-    let query = authorName.toLowerCase();
+    let query = authorName;
     axios.get(`http://localhost:5000/articles/search?&author=${query}`)
       .then(response => {
         console.log(response.data)

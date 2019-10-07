@@ -52,7 +52,7 @@ export default class searchFiles extends Component {
     let authorName = this.state.description || null;
     let query = authorName.toLowerCase();
     let path = `results`;
-        this.props.history.push(path, query);
+        this.props.history.push(path, this.state);
   }
    
   componentDidMount() {

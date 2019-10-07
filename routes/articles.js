@@ -20,12 +20,13 @@ router.route('/search').get(async (req, res) => {
   }
   if (fromDate && toDate ) {
    let date = { "date": {
-      $gte: fromDate,
-      $lt: toDate
+      $gte: new Date(fromDate),
+      $lt: new Date(toDate)
     }
   }
-  query.date = date
-  }
+  // let date = {"date" : {"$gte": new Date(fromDate)}}
+  query.date = date.date
+ }
 console.log(query)
   await Articles.find(query)
     .then(Articles => {
