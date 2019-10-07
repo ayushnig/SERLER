@@ -21,6 +21,7 @@ export default class Results extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   
     this.state = {
+      query: this.props.location.state.description,
       articles: [],
       description: this.props.description,
       results: [],
@@ -28,7 +29,21 @@ export default class Results extends Component {
       showSearch: false
     }
 
-}
+  }
+
+  componentWillMount() {
+    let authorName = this.state.query || null;
+    let query = authorName;
+    axios.get(`http://localhost:5000/articles/search?&author=${query}`)
+      .then(response => {
+        console.log(response.data)
+        this.setState({ articles: response.data })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
 
 toggle = () => {
   console.log('print me' + this.state.showSearch)
@@ -65,15 +80,15 @@ onSubmit(e) {
   window.location = '/results';
 }
 
-    componentDidMount() {
-        axios.get('http://localhost:5000/articles/')
-          .then(response => {
-            this.setState({ articles: response.data })
-          })
-          .catch((error) => {
-            console.log(error);
-          })
-      }
+    // componentDidMount() {
+    //     axios.get('http://localhost:5000/articles/')
+    //       .then(response => {
+    //         this.setState({ articles: response.data })
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //       })
+    //   }
 
       
   render() {
@@ -227,7 +242,7 @@ onSubmit(e) {
               asc: true
             }
           ]}
-          defaultPageSize={10}
+          pageSize={articles.length}
           className="-striped -highlight"
         />
         <br />
