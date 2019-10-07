@@ -97,7 +97,12 @@ onSubmit(e) {
       date: new Date()
       
   }
-
+  axios({
+    method: 'post',
+    url: 'http://localhost:5000/articles/add',
+    headers: {}, 
+    data: Papers
+  });
   console.log(Papers);
   
 }
