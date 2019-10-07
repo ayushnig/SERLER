@@ -34,6 +34,9 @@ connection.once('open', () => {
 const articlesRouter = require('./routes/articles');
 app.use('/articles', articlesRouter);
 
+const searchesRouter = require('./routes/searches');
+app.use('/searches', searchesRouter);
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
