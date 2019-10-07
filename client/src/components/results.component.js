@@ -15,15 +15,16 @@ export default class Results extends Component {
   constructor(props) {
 
     super(props);
-
+    console.log(this.props.location.state)
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.ontoggle = this.toggle.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-  
     this.state = {
-      query: this.props.location.state.description,
+      start:this.props.location.state.start || '',
+      end: this.props.location.state.end || '',
+      query: this.props.location.state,
       articles: [],
-      description: this.props.description,
+      description: this.props.location.state.description || '',
       results: [],
       toggle: true,
       showSearch: false
@@ -32,12 +33,32 @@ export default class Results extends Component {
   }
 
   componentWillMount() {
-    let authorName = this.state.query || null;
-    let query = authorName;
-    axios.get(`http://localhost:5000/articles/search?&author=${query}`)
+    let authorName = '';
+    let fromDate = '';
+    let toDate = '';
+    if(this.state.query){
+      if(this.state.query.description) {
+        authorName = this.state.query.description.toLowerCase() || null;
+      }
+      else if (this.state.query.start && this.state.query.end ) {
+        fromDate = this.state.query.start
+        toDate = this.state.query.end
+      }
+    }
+    // let authorName = this.state.query.description || null;
+    axios.get(`http://localhost:5000/articles/search?&author=${authorName}&fromDate=${fromDate}&toDate=${toDate}`)
       .then(response => {
         console.log(response.data)
-        this.setState({ articles: response.data })
+        if (response.data && response.data.length > 0) {
+          for (let i = 0; i < response.data.length; i++ ){
+            let dateConversion = response.data[i].date
+            console.log(dateConversion)
+           response.data[i].date = new Date(dateConversion).toISOString().split('T')[0];
+          }
+          this.setState({ articles: response.data })
+        } else {
+          this.setState({articels: ''})
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -69,15 +90,6 @@ onChangeEnd(date) {
 
 onSubmit(e) {
   e.preventDefault();
-
-  const Search = {
-    description: this.state.description
-
-
-  }
-
-  console.log(Search);
-  window.location = '/results';
 }
 
     // componentDidMount() {
@@ -202,13 +214,13 @@ onSubmit(e) {
                 },
 
                 {
-                    Header: "Journal",
+                    Header: "Source",
                     accessor: "journal"
                   },
 
                   {
-                    Header: "Year",
-                    accessor: "year"
+                    Header: "Date of Publish",
+                    accessor: "date"
                   },
 
                   {
@@ -217,20 +229,9 @@ onSubmit(e) {
                   },
 
                   {
-                    Header: "Number",
-                    accessor: "number"
-                  },
-
-                  {
                     Header: "Pages",
                     accessor: "pages"
                   },
-
-                  {
-                    Header: "Month",
-                    accessor: "month"
-                  }
-
 
               ]
             },

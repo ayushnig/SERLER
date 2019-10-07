@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import searchFiles from "./search.component"
 import "react-datepicker/dist/react-datepicker.css";
@@ -27,7 +28,7 @@ export default class Advance extends Component {
             toggle: true,
             method: '',
             operator: '',
-            value: ''
+            keyword: ''
         }
     }
 
@@ -63,21 +64,26 @@ export default class Advance extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-
-        const AdvSearch = {
-            description: this.props.description,
-            start: this.state.start,
-            end: this.state.end,
-            method: this.state.method,
-            operator: this.state.operator,
-            value: this.state.value
+        if (this.props.description || this.state.start || this.state.end || this.state.method || this.state.operator || this.state.keyword) {
+            const AdvSearch = {
+                description: this.props.description,
+                start: this.state.start,
+                end: this.state.end,
+                method: this.state.method,
+                operator: this.state.operator,
+                keyword: this.state.keyword
+            }
+            console.log(AdvSearch);
+            console.log(this.state)
+            let authorName = this.state.description || null;
+            // let query = authorName.toLowerCase();
+            let path = `results`;
+            this.props.history.push(path, AdvSearch);
+        } else {
+            alert('Please enter atleast one field')
         }
 
-        console.log(AdvSearch);
-        window.location = '/results';
     }
-
-
 
     render() {
         return (
@@ -157,3 +163,4 @@ export default class Advance extends Component {
         )
     }
 }
+// export default withRouter(Advance);
