@@ -46,15 +46,11 @@ export default class searchFiles extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
-    const Search = {
-      description: this.state.description
-
-
-    }
-
-    console.log(Search);
-    window.location = '/results';
+    console.log(e)
+    let authorName = this.state.description || null;
+    let query = authorName.toLowerCase();
+    let path = `results`;
+        this.props.history.push(path, this.state);
   }
 
   componentDidMount() {

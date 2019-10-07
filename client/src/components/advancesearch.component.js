@@ -95,7 +95,6 @@ export default class Advance extends Component {
                                 maxDate={new Date()}
                                 dropdownMode="select"
                                 placeholderText="MM/DD/YYYY"
-                                required
                             />
                             <label className="help" > End Date: </label>
                             <DatePicker
@@ -107,7 +106,6 @@ export default class Advance extends Component {
                                 maxDate={new Date()}
                                 dropdownMode="select"
                                 placeholderText="MM/DD/YYYY"
-                                required
                             />
                         </div >
 
@@ -119,7 +117,7 @@ export default class Advance extends Component {
                         <label className="drop">If:</label>
 
                         <select className="form-control" id="exampleSelect1" value={this.state.method}
-                            onChange={this.onChangeMethod} required>
+                            onChange={this.onChangeMethod}>
                             <option value="">Select Method</option>
                             <option>TDD</option>
                             <option>Scrum</option>
@@ -133,7 +131,7 @@ export default class Advance extends Component {
 
                         <label className="drop">Operator: </label>
                         <select className="form-control" id="exampleSelect2" value={this.state.operator}
-                            onChange={this.onChangeOperator} required>
+                            onChange={this.onChangeOperator}>
                             <option value="">Select Operator</option>
                             <option>Contains</option>
                             <option>Doesn't Contain</option>
@@ -146,7 +144,7 @@ export default class Advance extends Component {
                         </select>
 
                         <label className="drop">Value: </label>
-                        <input type="text" required className="form-control"
+                        <input type="text" className="form-control"
                             value={this.props.value}
                             onChange={this.onChangeValue} padding-bottom="20px" />
                     </div>
