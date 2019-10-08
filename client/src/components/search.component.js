@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import "react-datepicker/dist/react-datepicker.css";
 import Advance from './advancesearch.component';
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -23,7 +23,6 @@ export default class searchFiles extends Component {
   }
 
   toggle = () => {
-    console.log('print me' + this.state.showSearch)
     const { showSearch } = this.state;
     this.setState({
       showSearch: !showSearch
@@ -36,13 +35,6 @@ export default class searchFiles extends Component {
       description: e.target.value
     })
   }
-
-  onChangeEnd(date) {
-    this.setState({
-      end: date
-    })
-  }
-
 
   onSubmit(e) {
     e.preventDefault();
