@@ -48,7 +48,7 @@ export default class Results extends Component {
       }
     }
     // let authorName = this.state.query.description || null;
-    axios.get(`http://localhost:5000/articles/search?&author=${authorName}&fromDate=${fromDate}&toDate=${toDate}`)
+    axios.get(`/articles/search?&author=${authorName}&fromDate=${fromDate}&toDate=${toDate}`)
       .then(response => {
         console.log(response.data)
         if (response.data && response.data.length > 0) {
@@ -113,7 +113,7 @@ export default class Results extends Component {
     }
     console.log(fromDate + toDate)
 
-    axios.get(`http://localhost:5000/articles/search?&author=${authorName}&fromDate=${fromDate}&toDate=${toDate}`)
+    axios.get(`articles/search?&author=${authorName}&fromDate=${fromDate}&toDate=${toDate}`)
       .then(response => {
         console.log(response.data)
         if (response.data && response.data.length > 0) {

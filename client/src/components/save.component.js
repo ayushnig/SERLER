@@ -105,7 +105,7 @@ onSubmit(e) {
   }
   axios({
     method: 'post',
-    url: 'http://localhost:5000/searches/save',
+    url: '/searches/save',
     headers: {}, 
     data: searches
   });

@@ -17,7 +17,7 @@ export default class Saved extends Component {
 
 
 componentDidMount() {
-    axios.get('http://localhost:5000/searches')
+    axios.get('/searches')
       .then(response => {
         if (response.data && response.data.length > 0) {
           for (let i = 0; i < response.data.length; i++ ){
