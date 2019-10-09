@@ -12,6 +12,8 @@ router.route('/').get((req, res) => {
 router.route('/save').post((req, res) => {
     const name = req.body.name;
     const description = req.body.description;
+    
+    const source = req.body.source;
     const start = req.body.start;
     const end = req.body.end;
     const method = req.body.method;
@@ -22,6 +24,7 @@ router.route('/save').post((req, res) => {
     const newSearches = new Searches({
       name,
       description,
+      source,
       start,
       end,
       method,

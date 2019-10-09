@@ -5,6 +5,8 @@ const Schema = mongoose.Schema;
 const searchesSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
+  
+  source: { type: String, required: true },
   start: { type: Date, required: true },
   end: { type: Date, required: true},
   method: { type: String, required: true},

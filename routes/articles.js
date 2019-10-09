@@ -39,25 +39,19 @@ console.log(query)
 router.route('/add').post((req, res) => {
   const author = req.body.author;
   const title = req.body.title;
-  const journal = req.body.journal;
-  const year = req.body.year;
-  const volume = req.body.volume;
-  const number = req.body.number;
+  const source = req.body.source;
   const pages = req.body.pages;
-  const month = req.body.month;
+  const date = req.body.date;
 
 
   const newArticles = new Articles({
     author,
     title,
-    journal,
-    year,
-    volume,
-    number,
+    source,
     pages,
-    month,
+    date,
   });
-
+console.log(newArticles);
   newArticles.save()
     .then(() => res.json('Article has been added!'))
     .catch(err => res.status(400).json('Error: ' + err));
