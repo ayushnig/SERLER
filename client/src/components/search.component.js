@@ -92,7 +92,7 @@ export default class searchFiles extends Component {
           </div>
         </form>
         {this.state.showSearch ? <button className="btn btn-dark" onClick={this.toggle}>Hide Advanced Search</button> : <button className="btn btn-dark" onClick={this.toggle}>Show Advanced Search</button>}
-        {this.state.showSearch ? <Advance history={this.props.history} description = {this.state.description} /> : null}
+        {this.state.showSearch ? <Advance history={this.props.history} description={this.state.description} /> : null}
       </div>
 
     )
