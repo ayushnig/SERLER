@@ -40,7 +40,7 @@ export default class Results extends Component {
     let toDate = '';
     if (this.state.query) {
       if (this.state.query.description) {
-        authorName = this.state.query.description.toLowerCase() || null;
+        authorName = this.state.query.description.toLowerCase() || '';
       }
       else if (this.state.query.start && this.state.query.end) {
         fromDate = this.state.query.start
@@ -98,13 +98,13 @@ export default class Results extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    let authorName = this.state.description || null;
+    let authorName = this.state.description || '';
 
     let fromDate = this.state.start || '';
     let toDate = this.state.end || '';
     if (this.state.query) {
       if (this.state.query.description) {
-        authorName = authorName || null;
+        authorName = authorName || '';
       }
       else if (this.state.query.start && this.state.query.end) {
         fromDate = this.state.query.start
@@ -155,7 +155,7 @@ export default class Results extends Component {
 
               <input type="text" className="form-control"
                 value={this.state.description}
-                onChange={this.onChangeDescription} padding-bottom="20px" />
+                onChange={this.onChangeDescription} padding-bottom="20px" required/>
 
               <div class="d-flex justify-content-end">
                 <a href="/savesearch">Save Search</a>
@@ -283,7 +283,9 @@ export default class Results extends Component {
             ]}
             pageSize={articles.length}
             className="-striped -highlight"
-          /> : null}
+          /> : 
+          <div className="text">No records found</div>
+          }
 
         </div>
       );

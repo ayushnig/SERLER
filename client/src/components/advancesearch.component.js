@@ -15,7 +15,6 @@ export default class Advance extends Component {
         this.handleMethod = this.handleMethod.bind(this);
         this.handleOperator = this.handleOperator.bind(this);
         this.handleKeyword = this.handleKeyword.bind(this);
-
         this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
