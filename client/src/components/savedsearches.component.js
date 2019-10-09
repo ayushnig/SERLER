@@ -6,29 +6,29 @@ import axios from 'axios';
 
 export default class Saved extends Component {
 
-    constructor(props){
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            savedSearches: []
-          
+    this.state = {
+      savedSearches: []
+
     }
-}
+  }
 
 
-componentDidMount() {
+  componentDidMount() {
     axios.get('/searches')
       .then(response => {
         if (response.data && response.data.length > 0) {
-          for (let i = 0; i < response.data.length; i++ ){
+          for (let i = 0; i < response.data.length; i++) {
             let startConversion = response.data[i].start
             let endConversion = response.data[i].end
-           response.data[i].start = new Date(startConversion).toISOString().split('T')[0];
-           response.data[i].end = new Date(endConversion).toISOString().split('T')[0];
+            response.data[i].start = new Date(startConversion).toISOString().split('T')[0];
+            response.data[i].end = new Date(endConversion).toISOString().split('T')[0];
           }
           this.setState({ savedSearches: response.data })
         } else {
-          this.setState({savedSearches: ''})
+          this.setState({ savedSearches: '' })
         }
       })
       .catch((error) => {
@@ -36,11 +36,11 @@ componentDidMount() {
       })
   }
 
-    render() {
-        const { savedSearches } = this.state;
-        return (
-            <div>
-                <ReactTable
+  render() {
+    const { savedSearches } = this.state;
+    return (
+      <div>
+        <ReactTable
           data={savedSearches}
           columns={[
             {
@@ -56,25 +56,25 @@ componentDidMount() {
                   accessor: "description"
                 },
 
-                  {
-                    Header: "Source",
-                    accessor: "source"
-                  },
-                  {
-                    Header: "Method",
-                    accessor: "method"
-                  },
+                {
+                  Header: "Source",
+                  accessor: "source"
+                },
+                {
+                  Header: "Method",
+                  accessor: "method"
+                },
 
-                  {
-                    Header: "Operator",
-                    accessor: "operator"
-                  },
+                {
+                  Header: "Operator",
+                  accessor: "operator"
+                },
 
-                  {
-                    Header: "Value",
-                    accessor: "value"
-                  },
-                  
+                {
+                  Header: "Value",
+                  accessor: "value"
+                },
+
                 {
                   Header: "Start Date",
                   accessor: "start"
@@ -88,7 +88,7 @@ componentDidMount() {
 
               ]
             },
-            
+
           ]}
           defaultSorted={[
             {
@@ -100,8 +100,8 @@ componentDidMount() {
           className="-striped -highlight"
         />
         <br />
-        
-            </div>
-        )
-    }
+
+      </div>
+    )
+  }
 }

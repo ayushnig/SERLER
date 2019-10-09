@@ -7,8 +7,9 @@
     "start": "node index.js",
     "start-watch": "nodemon index.js",
     "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\"",
-    "heroku-postbuild": "cd client && npm install && npm run build",
-    "test": "mocha"
+    "heroku-postbuild": "cd client && yarn --production=false && yarn run build",
+    "test": "mocha --timeout 5000 ",
+    "client": "npm start --prefix client"
   },
   "engines": {
     "yarn": "1.10.1",

@@ -1,37 +1,39 @@
-var assert = require('assert');
-var should = require('chai').should();
+let assert = require('assert');
+let chai = require("chai");
+let should = require('chai').should();
+let chaiHttp = require("chai-http");
+let server=require("../index");
+chai.use(chaiHttp);
 
-describe('Object Test', function(){
-  it('should have property name', function(){
-    var car = {name:'Figo', Maker:'Ford'}
-
-    car.should.have.property('name');
-  });
-
-  it('should have property name with value Figo', function(){
-    var car = {name:'Figo', Maker:'Ford'}
-    car.should.have.property('name').equal('Figo');
-  });
-
-  it('should compare objects', function(){
-    var car = {name:'Figo', Maker:'Ford'}
-    var car1 = {name:'Figo', Maker:'Ford'}
-
-    // car.should.equal(car1);
-    car.should.deep.equal(car1);
-  });
-
-  it('should compare objects', function(){
-    var car = {name:'Figo', Maker:'Ford'}
-    var car1 = {name:'Figo', Maker:'Ford'}
-
-    // car.should.equal(car1);
-    car.should.deep.equal(car1);
-  });
-
-  // it('handling null', function(){
-  //   var car = null;
-  //   //car.should.not.exist;
-  //   should.exist(car);
-  // });
+  describe('/GET Articles ', () => {
+    it('it should GET all the Articles', (done) => {
+      chai.request(server)
+          .get('/articles')
+          .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+            done();
+          });
+    });
 });
+
+describe('/POST Articels', () => {
+  it('it should POST a Articles', (done) => {
+      let article = {
+        "author": "yeap",
+        "title": "Congnitive approach in Artificial intelligince",
+        "source": "journal",
+        "pages": "60-67",
+        "date": "2019-10-08T11:00:00.000Z",
+      }
+     
+    chai.request(server)
+        .post('/articles/add')
+        .send(article)
+        .end((err, res) => {
+              res.should.have.status(200);
+          done();
+        });
+  });
+});
+
