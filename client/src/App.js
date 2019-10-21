@@ -12,7 +12,6 @@ import Saved from './components/savedsearches.component';
 import Save from './components/save.component';
 import SimpleReactFileUpload from './components/fileupload.component';
 import Footer from './components/footer.component';
-
 import Author from './components/authorsearch.component';
 
 function App() {
