@@ -18,6 +18,9 @@ export default class Navbar extends Component {
           <li className="navbar-item">
           <Link to="/fileupload" className="nav-link">Bibtex Upload</Link>
           </li>
+          <li className="navbar-item">
+          <Link to="/advancesearch" className="nav-link">Advance Search</Link>
+          </li>
 
         </ul>
         </div>

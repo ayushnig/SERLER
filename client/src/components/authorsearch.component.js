@@ -6,30 +6,31 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "../App.css";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+const logo = require('../logo.JPG');
 
 
-export default class Results extends Component {
+export default class Author extends Component {
 
   constructor(props) {
 
     super(props);
-    console.log(this.props.location.state)
+   
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeStart = this.onChangeStart.bind(this);
     this.onChangeEnd = this.onChangeEnd.bind(this);
     this.ontoggle = this.toggle.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
-      start: this.props.location.state.start || '',
-      end: this.props.location.state.end || '',
-      query: this.props.location.state,
+      start: '',
+      end: '',
+      query: '',
       articles: [],
-      description: this.props.location.state.description || '',
+      description: '',
       searchField: '',
       results: [],
       toggle: true,
       showSearch: false,
-      showResultTable: true
+      showResultTable: false
     }
 
   }
@@ -148,12 +149,17 @@ export default class Results extends Component {
       const { articles } = this.state;
       return (
         <div>
-          <h1>Search Results</h1>
+            <div class="text-center">
+              <img src={logo} alt="Serler Logo" height="350px" width="500px" padding bottom="20px" />
+            </div>
+            <br></br>
+          <h4>Author Search</h4>
+          <br></br>
 
           <div>
             <form onSubmit={this.onSubmit}>
 
-              <input type="text" className="form-control"
+              <input placeholder="Enter Author Name here" type="text" className="form-control"
                 value={this.state.description}
                 onChange={this.onChangeDescription} padding-bottom="20px" required/>
 
@@ -284,7 +290,7 @@ export default class Results extends Component {
             pageSize={articles.length}
             className="-striped -highlight"
           /> : 
-          <div className="text">No records found</div>
+          ''
           }
 
         </div>

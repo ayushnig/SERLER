@@ -4,7 +4,7 @@ import "../App.css";
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import Advance from './advancesearch.component';
+
 
 
 export default class Save extends Component {
@@ -130,7 +130,7 @@ export default class Save extends Component {
             onChange={this.onChangeDescription} padding-bottom="20px" />
 
           <br />
-          <Advance />
+     
         </form>
       </div>
     )
