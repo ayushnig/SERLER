@@ -10,7 +10,7 @@ import searchFiles from "./components/search.component";
 
 import Saved from './components/savedsearches.component';
 import Save from './components/save.component';
-import SimpleReactFileUpload from './components/fileupload.component';
+import FileUpload from './components/fileupload.component';
 import Footer from './components/footer.component';
 import Author from './components/authorsearch.component';
 
@@ -27,12 +27,9 @@ function App() {
 
       <Route path = "/savedsearches" exact component={Saved} />
       <Route path = "/savesearch" exact component={Save} />
-      <Route path = "/fileupload" exact component={SimpleReactFileUpload} />
-<<<<<<< HEAD
+      <Route path = "/fileupload" exact component={FileUpload} />
       
     
-=======
->>>>>>> 9637cb99d593ec8d125eebd3298f72b658fdeed7
       
 
       </div>
