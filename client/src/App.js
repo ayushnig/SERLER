@@ -28,8 +28,11 @@ function App() {
       <Route path = "/savedsearches" exact component={Saved} />
       <Route path = "/savesearch" exact component={Save} />
       <Route path = "/fileupload" exact component={SimpleReactFileUpload} />
+<<<<<<< HEAD
       
     
+=======
+>>>>>>> 9637cb99d593ec8d125eebd3298f72b658fdeed7
       
 
       </div>
