@@ -10,6 +10,7 @@ import Advance from './components/advancesearch.component';
 import Results from './components/results.component';
 import Saved from './components/savedsearches.component';
 import Save from './components/save.component';
+import SimpleReactFileUpload from './components/fileupload.component';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path = "/results" exact component={Results} />
       <Route path = "/savedsearches" exact component={Saved} />
       <Route path = "/savesearch" exact component={Save} />
+      <Route path = "/fileupload" exact component={SimpleReactFileUpload} />
       
 
       </div>
