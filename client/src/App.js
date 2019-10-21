@@ -6,10 +6,14 @@ import Navbar from './components/navbar.component';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import searchFiles from "./components/search.component";
-import Advance from './components/advancesearch.component';
-import Results from './components/results.component';
+
+
 import Saved from './components/savedsearches.component';
 import Save from './components/save.component';
+import SimpleReactFileUpload from './components/fileupload.component';
+import Footer from './components/footer.component';
+
+import Author from './components/authorsearch.component';
 
 function App() {
   return (
@@ -20,13 +24,17 @@ function App() {
       <br/>
       <Route path="/addfiles" exact component={addFiles} />
       <Route path="/" exact component={searchFiles} />
-      <Route path = "/advancesearch" exact component={Advance} />
-      <Route path = "/results" exact component={Results} />
+      <Route path = "/advancesearch" exact component={Author} />
+
       <Route path = "/savedsearches" exact component={Saved} />
       <Route path = "/savesearch" exact component={Save} />
+      <Route path = "/fileupload" exact component={SimpleReactFileUpload} />
+      
+    
       
 
       </div>
+      <Footer />
 
     </Router>
   );
