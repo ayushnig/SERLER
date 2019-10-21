@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
+const firebase = require('firebase');
 
 // require('dotenv').config();
 
@@ -18,6 +19,20 @@ const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 })
+
+
+ 
+const firebaseConfig = {
+  apiKey: "AIzaSyD6fusjXSa4VwEZDzdLFvpJyEDQHamsNks",
+  authDomain: "serler-b3a52.firebaseapp.com",
+  databaseURL: "https://serler-b3a52.firebaseio.com",
+  projectId: "serler-b3a52",
+  storageBucket: "serler-b3a52.appspot.com",
+  messagingSenderId: "695052293400",
+  appId: "1:695052293400:web:cf05eda59e1de71816fa6d",
+  measurementId: "G-SCG9GCD9H4"
+};
+firebase.initializeApp(firebaseConfig);
 
 // mongoose.Promise = global.Promise
 // mongoose
