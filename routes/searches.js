@@ -1,14 +1,14 @@
-const router = require('express').Router();
-let Searches = require('../models/searches');
+const router = require('express').Router(); //router pacages for creating routes for the server side processing of data
+let Searches = require('../models/searches'); //the schema for the searches to be saved, searched is imported here
 
-
+//default search for getting all the searches saved in the mongodb
 router.route('/').get((req, res) => {
     Searches.find()
       .then(Searches => res.json(Searches))
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
-
+//route created specifically for saving a new search using the schema and the save() function
 router.route('/save').post((req, res) => {
     const name = req.body.name;
     const description = req.body.description;

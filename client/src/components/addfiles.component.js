@@ -71,7 +71,7 @@ onSubmit(e) {
   }
   axios({
     method: 'post',
-    url: 'http://localhost:5000/articles/add',
+    url: '/articles/add',
     headers: {}, 
     data: Papers
   });

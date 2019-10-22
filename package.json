@@ -8,7 +8,7 @@
     "start-watch": "nodemon index.js",
     "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\"",
     "heroku-postbuild": "cd client && yarn --production=false && yarn run build",
-    "test": "mocha --timeout 5000 ",
+    "test": "nyc mocha --timeout 5000 --exit ",
     "client": "npm start --prefix client"
   },
   "engines": {
@@ -28,10 +28,11 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "concurrently": "^4.0.1",
     "mocha": "^6.2.0",
     "nodemon": "^1.19.2",
-    "chai-http": "^4.3.0"
+    "nyc": "^14.1.1"
   },
   "keywords": []
 }

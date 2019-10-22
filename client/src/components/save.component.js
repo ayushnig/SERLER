@@ -89,29 +89,28 @@ export default class Save extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    alert("Your search has been saved")
+    
 
-    const searches = {
+    const Searches = {
       name: this.state.name,
       description: this.state.description,
-
       source: this.state.source,
       start: this.state.start,
       end: this.state.end,
       method: this.state.method,
       operator: this.state.operator,
-      value: this.state.value,
+      value: this.state.value
 
     }
     axios({
       method: 'post',
       url: '/searches/save',
       headers: {},
-      data: searches
+      data: Searches
     });
 
-    console.log(searches);
-    window.location = "/savesearch";
+    console.log(Searches);
+    
 
   }
 
@@ -128,6 +127,77 @@ export default class Save extends Component {
           <input type="text" required className="form-control"
             value={this.state.description}
             onChange={this.onChangeDescription} padding-bottom="20px" />
+ <div className="i-am-centered" >
+                  <div className="column-container" >
+                    <label className="help" > Start Date: </label>
+                    <DatePicker
+                      selected={this.state.start}
+                      onChange={this.onChangeStart}
+                      peekNextMonth
+                      showMonthDropdown
+                      showYearDropdown
+                      maxDate={new Date()}
+                      dropdownMode="select"
+                      placeholderText="MM/DD/YYYY"
+
+                    />
+                    <label className="help" > End Date: </label>
+                    <DatePicker
+                      selected={this.state.end}
+                      onChange={this.onChangeEnd}
+                      peekNextMonth
+                      showMonthDropdown
+                      showYearDropdown
+                      maxDate={new Date()}
+                      dropdownMode="select"
+                      placeholderText="MM/DD/YYYY"
+
+                    />
+                  </div >
+
+
+                </div>
+                <br></br>
+
+                <div className="btn-group btn-block">
+                  <label className="drop">If:</label>
+
+                  <select className="form-control" id="exampleSelect1" value={this.state.method}
+                    onChange={this.onChangeMethod}>
+                    <option value="">Select Method</option>
+                    <option>TDD</option>
+                    <option>Scrum</option>
+                    <option>BDD</option>
+                    <option>Kanban</option>
+                    <option>Agile</option>
+                    <option>Walerfall</option>
+                    <option>lean</option>
+
+                  </select>
+
+                  <label className="drop">Operator: </label>
+                  <select className="form-control" id="exampleSelect2" value={this.state.operator}
+                    onChange={this.onChangeOperator}>
+                    <option value="">Select Operator</option>
+                    <option>Contains</option>
+                    <option>Doesn't Contain</option>
+                    <option>Begins with</option>
+                    <option>Ends With</option>
+                    <option>Is Equal to</option>
+                    <option>Is less than</option>
+                    <option>Is more than</option>
+
+                  </select>
+
+                  <label className="drop">Value: </label>
+                  <input type="text" className="form-control"
+                    value={this.props.value}
+                    onChange={this.onChangeValue} padding-bottom="20px" />
+                </div>
+                {this.state.show}
+                <div class="i-am-centered-button" padding-top="20px">
+                  <input type="submit" value="Search" className="btn btn-dark" padding-top="20px" />
+                </div>
 
           <br />
      
