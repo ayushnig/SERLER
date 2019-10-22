@@ -1,16 +1,17 @@
-import ReactTable from "react-table";
-import "react-table/react-table.css";
-import axios from 'axios';
+import ReactTable from "react-table"; //an important module to display results in tabular fomat
+import "react-table/react-table.css";//css for the react table
+import axios from 'axios'; //for sending get,post requests to mongodb
 import React, { Component, useState } from 'react';
-import "bootstrap/dist/css/bootstrap.min.css"
-import "../App.css";
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
-const logo = require('../logo.JPG');
+import "bootstrap/dist/css/bootstrap.min.css" //css for styling
+import "../App.css"; //css for extra and custom styling
+import DatePicker from 'react-datepicker'; //package for selectig date from a calander popup
+import "react-datepicker/dist/react-datepicker.css"; //css accompanied by the datpicker package
+const logo = require('../logo.JPG'); //logo of the SERLER
 
-
+//created the author class as an advance search component to search mongodb using author name
 export default class Author extends Component {
 
+  //to work with the chaning states
   constructor(props) {
 
     super(props);
@@ -20,6 +21,7 @@ export default class Author extends Component {
     this.onChangeEnd = this.onChangeEnd.bind(this);
     this.ontoggle = this.toggle.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+
     this.state = {
       start: '',
       end: '',
@@ -35,6 +37,7 @@ export default class Author extends Component {
 
   }
 
+  //created variables for the search string here to be sent to mongodb
   componentWillMount() {
     let authorName = this.state.description;
     let fromDate = '';
@@ -48,6 +51,7 @@ export default class Author extends Component {
         toDate = this.state.query.end
       }
     }
+    //created a search url for the mongodb
     // let authorName = this.state.query.description || null;
     axios.get(`/articles/search?&author=${authorName}&fromDate=${fromDate}&toDate=${toDate}`)
       .then(response => {
@@ -68,7 +72,7 @@ export default class Author extends Component {
       })
   }
 
-
+//small modules to toggle visibility of search
   toggle = () => {
     console.log('print me' + this.state.showSearch)
     const { showSearch } = this.state;
@@ -77,13 +81,14 @@ export default class Author extends Component {
     })
   }
 
-
+//set state for the search string as reffered everywhere by descripton
   onChangeDescription(e) {
     this.setState({
       description: e.target.value
     })
   }
 
+//set state for start and end date
   onChangeStart(date) {
     this.setState({
       start: date
@@ -96,7 +101,7 @@ export default class Author extends Component {
     })
   }
 
-
+//on submit event where the search button is clicked
   onSubmit(e) {
     e.preventDefault();
     let authorName = this.state.description || '';
@@ -132,16 +137,6 @@ export default class Author extends Component {
         console.log(error);
       })
   }
-
-  // componentDidMount() {
-  //     axios.get('http://localhost:5000/articles/')
-  //       .then(response => {
-  //         this.setState({ articles: response.data })
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       })
-  //   }
 
 
   render() {

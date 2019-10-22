@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; //essential package for linking together components
 
+//class defined specifically for having a navigation bar linked to appropriate components
 export default class Navbar extends Component {
 
   render() {

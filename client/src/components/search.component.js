@@ -1,14 +1,15 @@
-import ReactTable from "react-table";
-import "react-table/react-table.css";
-import axios from 'axios';
+import ReactTable from "react-table"; //package for displaying the results of search
+import "react-table/react-table.css"; //css for the react table package
+import axios from 'axios'; //package used to send get and post requests to mongodb
 import React, { Component, useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "../App.css";
-const logo = require('../logo.JPG');
+const logo = require('../logo.JPG'); 
 
-
+//class created to display the results of the search query on the same page
 export default class Results extends Component {
 
+    //defining states
   constructor(props) {
 
     super(props);
@@ -30,6 +31,7 @@ export default class Results extends Component {
 
   }
 
+  //module to get variables initialized for the following search query 
   componentWillMount() {
     let authorName = this.state.description;
     let fromDate = '';
@@ -43,6 +45,8 @@ export default class Results extends Component {
         toDate = this.state.query.end
       }
     }
+
+    //module to fetch the results of the search
     // let authorName = this.state.query.description || null;
     axios.get(`/articles/search?&author=${authorName}&fromDate=${fromDate}&toDate=${toDate}`)
       .then(response => {
@@ -63,23 +67,24 @@ export default class Results extends Component {
       })
   }
 
-
+  //module used to toggle visibility of components
   toggle = () => {
     console.log('print me' + this.state.showSearch)
+    console.log(process.env.API_KEY)
     const { showSearch } = this.state;
     this.setState({
       showSearch: !showSearch
     })
   }
 
-
+  //set state module for description
   onChangeDescription(e) {
     this.setState({
       description: e.target.value
     })
   }
 
-
+  //module for the event of submit, click on search button
   onSubmit(e) {
     e.preventDefault();
     let authorName = this.state.description || '';

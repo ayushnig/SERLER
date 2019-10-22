@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import ReactTable from "react-table";
-import "react-table/react-table.css";
-import axios from 'axios';
+import ReactTable from "react-table"; //package used to display the results of the saved searches querry
+import "react-table/react-table.css"; //css for the react table package
+import axios from 'axios'; //package for sending get and post requests to the mongodb
 
-
+//class created for displaying the saved searches from the mongodb database
 export default class Saved extends Component {
 
   constructor(props) {
@@ -15,7 +15,7 @@ export default class Saved extends Component {
     }
   }
 
-
+  //module created for fetching the saved searches from the mongodb
   componentDidMount() {
     axios.get('/searches')
       .then(response => {

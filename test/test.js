@@ -5,6 +5,8 @@ let chaiHttp = require("chai-http");
 let server=require("../index");
 chai.use(chaiHttp);
 
+//basic unit tests for checking the validity of the request to find articles
+
   describe('/GET Articles ', () => {
     it('it should GET all the Articles', (done) => {
       chai.request(server)
@@ -17,6 +19,7 @@ chai.use(chaiHttp);
     });
 });
 
+//basic unit test to check whether the save articles component is working as required
 describe('/POST Articels', () => {
   it('it should POST a Articles', (done) => {
       let article = {
